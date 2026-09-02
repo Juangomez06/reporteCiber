@@ -12,6 +12,22 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
 
+// Dentro de la clase User
+
+    //Asignación de roles
+    public const ROLE_COORDINADOR = 'coordinador';
+    public const ROLE_ESTUDIANTE = 'estudiante';
+
+    public function isCoordinador(): bool
+    {
+        return $this->role === self::ROLE_COORDINADOR;
+    }
+
+    public function isEstudiante(): bool
+    {
+        return $this->role === self::ROLE_ESTUDIANTE;
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -21,6 +37,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
     ];
 
     /**
