@@ -15,6 +15,20 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
+
+                    {{-- Enlace para coordinador: Importar Estudiantes --}}
+                    @if(auth()->user()->isCoordinador())
+                        <x-nav-link :href="route('estudiantes.importar')" :active="request()->routeIs('estudiantes.importar')">
+                            {{ __('Importar Estudiantes') }}
+                        </x-nav-link>
+                    @endif
+
+                    {{-- Enlace para estudiante: Mi Panel --}}
+                    @if(auth()->user()->isEstudiante())
+                        <x-nav-link :href="route('estudiante.dashboard')" :active="request()->routeIs('estudiante.dashboard')">
+                            {{ __('Mi Panel') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -70,13 +84,28 @@
             <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
+
+            @if(auth()->user()->isCoordinador())
+                <x-responsive-nav-link :href="route('estudiantes.importar')" :active="request()->routeIs('estudiantes.importar')">
+                    {{ __('Importar Estudiantes') }}
+                </x-responsive-nav-link>
+            @endif
+
+            @if(auth()->user()->isEstudiante())
+                <x-responsive-nav-link :href="route('estudiante.dashboard')" :active="request()->routeIs('estudiante.dashboard')">
+                    {{ __('Mi Panel') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->
         <div class="pt-4 pb-1 border-t border-gray-200">
             <div class="px-4">
                 <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                {{-- Mostrar documento si no hay email --}}
+                <div class="font-medium text-sm text-gray-500">
+                    {{ Auth::user()->email ?? Auth::user()->doc ?? 'Sin identificador' }}
+                </div>
             </div>
 
             <div class="mt-3 space-y-1">
