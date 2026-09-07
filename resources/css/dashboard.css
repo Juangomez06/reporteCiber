@@ -1,0 +1,191 @@
+/* Dashboard de coordinador — Reporte Ciber */
+
+:root {
+    --dash-bg: #f4f5f9;
+    --dash-ink: #1f2430;
+    --dash-muted: #6b7280;
+    --dash-border: #e7e8ee;
+    --dash-accent: #4f46e5;
+    --dash-accent-soft: #eef2ff;
+    --dash-amber: #d97706;
+    --dash-green: #059669;
+    --dash-red: #dc2626;
+    --dash-radius: 14px;
+}
+
+.dash {
+    background: var(--dash-bg);
+}
+
+.dash-header {
+    background: linear-gradient(135deg, #1f2430 0%, #33395a 55%, #4f46e5 130%);
+    border-radius: var(--dash-radius);
+    padding: 1.75rem 2rem;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    box-shadow: 0 10px 30px -12px rgba(79, 70, 229, 0.45);
+}
+
+.dash-header__eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.65);
+    margin-bottom: 0.35rem;
+}
+
+.dash-header__title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.dash-header__subtitle {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* KPIs */
+.dash-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+@media (max-width: 900px) {
+    .dash-kpis { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.dash-kpi {
+    position: relative;
+    background: #fff;
+    border: 1px solid var(--dash-border);
+    border-radius: var(--dash-radius);
+    padding: 1.25rem 1.35rem;
+    overflow: hidden;
+    transition: transform .15s ease, box-shadow .15s ease;
+}
+
+.dash-kpi:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px -16px rgba(31, 36, 48, 0.25);
+}
+
+.dash-kpi::before {
+    content: "";
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 4px;
+    background: var(--dash-accent);
+}
+
+.dash-kpi--amber::before { background: var(--dash-amber); }
+.dash-kpi--green::before { background: var(--dash-green); }
+.dash-kpi--red::before   { background: var(--dash-red); }
+
+.dash-kpi__label {
+    color: var(--dash-muted);
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin: 0 0 0.4rem;
+}
+
+.dash-kpi__value {
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--dash-ink);
+    margin: 0;
+}
+
+.dash-kpi--amber .dash-kpi__value { color: var(--dash-amber); }
+.dash-kpi--green .dash-kpi__value { color: var(--dash-green); }
+.dash-kpi--red .dash-kpi__value   { color: var(--dash-red); }
+
+/* Paneles / gráficos */
+.dash-panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.25rem;
+}
+
+@media (max-width: 900px) {
+    .dash-panels { grid-template-columns: 1fr; }
+}
+
+.dash-panel {
+    background: #fff;
+    border: 1px solid var(--dash-border);
+    border-radius: var(--dash-radius);
+    padding: 1.5rem;
+}
+
+.dash-panel--wide {
+    grid-column: 1 / -1;
+}
+
+.dash-panel__title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 700;
+    color: var(--dash-ink);
+    margin: 0 0 1rem;
+    font-size: 0.95rem;
+}
+
+.dash-panel__title::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 999px;
+    background: var(--dash-accent);
+}
+
+.dash-panel__canvas-wrap {
+    position: relative;
+    height: 260px;
+}
+
+.dash-panel__canvas-wrap canvas {
+    max-height: 100%;
+}
+
+/* Acciones */
+.dash-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.75rem;
+}
+
+.dash-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.6rem 1.1rem;
+    border-radius: 999px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: opacity .15s ease, transform .15s ease;
+}
+
+.dash-btn:hover {
+    transform: translateY(-1px);
+}
+
+.dash-btn--primary {
+    background: var(--dash-ink);
+    color: #fff;
+}
+
+.dash-btn--ghost {
+    background: var(--dash-accent-soft);
+    color: var(--dash-accent);
+}
