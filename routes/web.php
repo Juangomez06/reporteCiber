@@ -5,6 +5,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\EstudianteImportController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,15 +20,24 @@ Route::get('/reportar/confirmacion/{codigo}', [CasoController::class, 'confirmac
 Route::get('/dashboard', function () {
     $user = auth()->user();
 
-    return redirect($user->isCoordinador() ? route('coordinador.dashboard') : route('estudiante.dashboard'));
+    if ($user->isCoordinador()) {
+        return redirect()->route('coordinador.dashboard');
+    }
+
+    if ($user->isEstudiante()) {
+        return redirect()->route('estudiante.dashboard');
+    }
+
+    return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// AUTENTICACIÓN
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    // Gestión de casos (coordinador y estudiante/orientador, filtrado por policy)
+    // Gestión de casos
     Route::get('/casos', [CasoController::class, 'index'])->name('casos.index');
     Route::get('/casos/exportar/csv', [ExportController::class, 'csv'])->name('casos.export.csv');
     Route::get('/casos/exportar/pdf', [ExportController::class, 'pdf'])->name('casos.export.pdf');
@@ -39,13 +49,24 @@ Route::middleware('auth')->group(function () {
 
 // COORDINADOR
 Route::middleware(['auth', 'role:coordinador'])->group(function () {
-    Route::get('/coordinador/dashboard', [DashboardController::class, 'coordinador'])->name('coordinador.dashboard');
-    Route::resource('instituciones', InstitucionController::class)->except('show');
+    Route::get('/coordinador/dashboard', [DashboardController::class, 'coordinador'])
+        ->name('coordinador.dashboard');
+
+    Route::resource('instituciones', InstitucionController::class)
+        ->except('show');
+
+    // Importación de estudiantes
+    Route::get('/estudiantes/importar', [EstudianteImportController::class, 'showForm'])
+        ->name('estudiantes.importar');
+
+    Route::post('/estudiantes/importar', [EstudianteImportController::class, 'import'])
+        ->name('estudiantes.importar.post');
 });
 
-//ESTUDIANTE
+// ESTUDIANTE
 Route::middleware(['auth', 'role:estudiante'])->group(function () {
-    Route::get('/estudiante/dashboard', [DashboardController::class, 'estudiante'])->name('estudiante.dashboard');
+    Route::get('/estudiante/dashboard', [DashboardController::class, 'estudiante'])
+        ->name('estudiante.dashboard');
 });
 
 require __DIR__.'/auth.php';

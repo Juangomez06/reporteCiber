@@ -15,9 +15,7 @@ class User extends Authenticatable
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasApiTokens, HasFactory, Notifiable;
 
-// Dentro de la clase User
-
-    //Asignación de roles
+    // Asignación de roles
     public const ROLE_COORDINADOR = 'coordinador';
     public const ROLE_ESTUDIANTE = 'estudiante';
 
@@ -46,6 +44,11 @@ class User extends Authenticatable
         return $this->hasMany(Caso::class, 'reporter_id');
     }
 
+    public function estudiante()
+    {
+        return $this->hasOne(Estudiante::class);
+    }
+
     /**
      * The attributes that are mass assignable.
      *
@@ -57,6 +60,7 @@ class User extends Authenticatable
         'password',
         'role',
         'institucion_id',
+        'doc',
     ];
 
     /**
@@ -82,3 +86,4 @@ class User extends Authenticatable
         ];
     }
 }
+
