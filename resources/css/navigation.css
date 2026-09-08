@@ -1,0 +1,420 @@
+/* =========================================================
+   PALETA "ENTORNO SEGURO" — VARIABLES GLOBALES
+   ========================================================= */
+:root {
+    /* Fondos (60%) */
+    --rc-bg-body: #F8F9FA;          /* Blanco Crema */
+    --rc-bg-card: #FFFFFF;          /* Blanco Puro */
+    --rc-navy: #1D3557;             /* Azul Pizarra Oscuro (sidebar, navbar) */
+
+    /* Primarios (30%) */
+    --rc-mint: #A8DADC;             /* Azul Menta Suave (botones, acentos) */
+    --rc-mint-hover: #7AC1C9;       /* Azul Menta Profundo (hover) */
+    --rc-mint-dark: #457B9D;        /* Azul Medio (iconos, bordes activos) */
+
+    /* Acentos (10%) */
+    --rc-accent-yellow: #FFD166;    /* Amarillo Amistoso (badges) */
+    --rc-accent-amber: #F4A261;     /* Ámbar (advertencias) */
+    --rc-accent-orange: #E76F51;    /* Naranja (destacar métricas) */
+
+    /* Semánticos */
+    --rc-success: #06D6A0;          /* Verde Esperanza (éxito) */
+    --rc-danger: #E63946;           /* Rojo Frambuesa (errores) */
+    --rc-danger-hover: #C1121F;     /* Rojo Profundo (hover peligro) */
+
+    /* Textos y bordes */
+    --rc-text-primary: #1D3557;     /* Texto principal (títulos) */
+    --rc-text-secondary: #4A5B6E;   /* Texto secundario (descripciones) */
+    --rc-text-muted: #A0AEC0;       /* Texto deshabilitado */
+    --rc-border: #E2E8F0;           /* Bordes de inputs y tablas */
+
+    /* Sombras y radios */
+    --rc-shadow: rgba(29, 53, 87, 0.10);
+    --rc-shadow-heavy: rgba(29, 53, 87, 0.16);
+    --rc-radius-sm: 0.5rem;
+}
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+.nav-bar {
+    width: 100%;
+    background: var(--rc-navy);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: relative;
+    z-index: 100;
+}
+
+.nav-container {
+    width: 100%;
+}
+
+.nav-inner {
+    width: min(100% - 2rem, 80rem);
+    min-height: 4rem;
+    height: 4rem;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* =========================================================
+   IZQUIERDA
+   ========================================================= */
+.nav-left {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    min-width: 0;
+}
+
+/* =========================================================
+   LOGO
+   ========================================================= */
+.nav-logo-container {
+    display: flex;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-brand {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    height: 100%;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.05rem;
+    font-weight: 800;
+    white-space: nowrap;
+}
+
+.nav-brand-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+    line-height: 1;
+    font-size: 1.1rem;
+}
+
+/* =========================================================
+   LINKS ESCRITORIO
+   ========================================================= */
+.nav-desktop-links {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    margin-left: 2.5rem;
+    gap: 1.8rem;
+}
+
+.nav-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    height: 100%;
+    padding: 0 0.15rem;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 2px solid transparent;
+    transition:
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.nav-link:hover {
+    color: #fff;
+    border-color: rgba(168, 218, 220, 0.5); /* --rc-mint con opacidad */
+}
+
+.nav-link.is-active {
+    color: #fff;
+    border-color: var(--rc-mint);
+}
+
+/* =========================================================
+   ICONOS
+   ========================================================= */
+.nav-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 1.35rem;
+    width: 1.35rem;
+    height: 1.35rem;
+    font-size: 1rem;
+    line-height: 1;
+    text-align: center;
+}
+
+/* =========================================================
+   USUARIO
+   ========================================================= */
+.nav-user-container {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+}
+
+.nav-user-wrapper {
+    position: relative;
+}
+
+.nav-user-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    min-height: 2.5rem;
+    padding: 0.45rem 0.85rem;
+    border: none;
+    border-radius: 999px;
+    background: var(--rc-mint);
+    color: var(--rc-navy);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background-color 0.15s ease,
+        transform 0.15s ease;
+}
+
+.nav-user-btn:hover {
+    background: var(--rc-mint-hover);
+}
+
+.nav-user-btn:active {
+    transform: scale(0.98);
+}
+
+.nav-user-name {
+    max-width: 12rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-user-arrow {
+    width: 0.75rem;
+    height: 0.75rem;
+    flex-shrink: 0;
+}
+
+/* =========================================================
+   DROPDOWN
+   ========================================================= */
+.nav-dropdown {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    right: 0;
+    width: 12rem;
+    overflow: hidden;
+    border-radius: var(--rc-radius-sm);
+    background: var(--rc-bg-card);
+    border: 1px solid var(--rc-border);
+    box-shadow: 0 20px 30px -14px var(--rc-shadow-heavy);
+}
+
+.nav-dropdown-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    color: var(--rc-text-primary);
+    font-size: 0.85rem;
+    font-weight: 500;
+    text-decoration: none;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease;
+}
+
+.nav-dropdown-link:hover {
+    background: #f1f6f8; /* Puedes cambiarlo por un color de la paleta si quieres, pero es sutil */
+}
+
+/* =========================================================
+   BOTÓN HAMBURGUESA
+   ========================================================= */
+.nav-mobile-toggle {
+    display: none;
+}
+
+.nav-burger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    padding: 0;
+    border: none;
+    border-radius: var(--rc-radius-sm);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.75);
+    cursor: pointer;
+}
+
+.nav-burger:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+}
+
+.nav-burger-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+/* =========================================================
+   MENÚ MÓVIL
+   ========================================================= */
+.nav-mobile-menu {
+    display: none;
+    width: 100%;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    background: var(--rc-navy);
+}
+
+.nav-mobile-links {
+    padding: 0.5rem 0 0.75rem;
+}
+
+.nav-link-mobile {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.7rem 1rem;
+    border-left: 4px solid transparent;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+        background-color 0.15s ease,
+        color 0.15s ease,
+        border-color 0.15s ease;
+}
+
+.nav-link-mobile:hover {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+}
+
+.nav-link-mobile.is-active {
+    border-left-color: var(--rc-mint);
+    background: rgba(168, 218, 220, 0.1);
+    color: #fff;
+}
+
+/* =========================================================
+   USUARIO MÓVIL
+   ========================================================= */
+.nav-mobile-user {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 1rem;
+}
+
+.nav-mobile-user-info {
+    margin-bottom: 0.75rem;
+}
+
+.nav-mobile-name {
+    color: #fff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-mobile-sub {
+    margin-top: 0.15rem;
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 0.8rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.nav-mobile-user-links {
+    display: flex;
+    flex-direction: column;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 900px) {
+    .nav-desktop-links {
+        margin-left: 1.5rem;
+        gap: 1.1rem;
+    }
+    .nav-link {
+        font-size: 0.82rem;
+    }
+    .nav-user-name {
+        max-width: 8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .nav-inner {
+        width: 100%;
+        padding: 0 1rem;
+    }
+    .nav-desktop-links,
+    .nav-user-container {
+        display: none;
+    }
+    .nav-mobile-toggle {
+        display: flex;
+        align-items: center;
+    }
+    .nav-mobile-menu {
+        display: block;
+    }
+    .nav-brand {
+        font-size: 0.98rem;
+    }
+    .nav-brand-icon {
+        font-size: 1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .nav-inner {
+        padding: 0 0.75rem;
+    }
+    .nav-brand {
+        font-size: 0.9rem;
+    }
+    .nav-brand-icon {
+        width: 1.35rem;
+        font-size: 0.95rem;
+    }
+    .nav-mobile-sub {
+        font-size: 0.75rem;
+    }
+}
+
+/* =========================================================
+   ACCESIBILIDAD
+   ========================================================= */
+.nav-brand:focus-visible,
+.nav-link:focus-visible,
+.nav-link-mobile:focus-visible,
+.nav-user-btn:focus-visible,
+.nav-burger:focus-visible,
+.nav-dropdown-link:focus-visible {
+    outline: 2px solid var(--rc-mint);
+    outline-offset: 3px;
+}

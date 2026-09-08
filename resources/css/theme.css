@@ -1,0 +1,170 @@
+/* ============================================================
+   Reporte Ciber — Paleta de colores global
+   Variables + utilidades reutilizables en toda la app.
+   ============================================================ */
+
+:root {
+    /* Fondos */
+    --rc-bg: #F8F9FA;              /* Blanco Crema — fondo general */
+    --rc-surface: #FFFFFF;         /* Blanco Puro — tarjetas, modales, login */
+
+    /* Marca / navegación */
+    --rc-navy: #1D3557;            /* Azul Pizarra Oscuro — sidebar/navbar, texto principal */
+
+    /* Botones primarios */
+    --rc-mint: #A8DADC;            /* Azul Menta Suave */
+    --rc-mint-hover: #7AC1C9;      /* Azul Menta Profundo */
+
+    /* Iconos / acentos / bordes activos */
+    --rc-blue: #457B9D;            /* Azul Medio */
+
+    /* Estados y badges */
+    --rc-yellow: #FFD166;          /* Amarillo Amistoso — badges "Nuevo", acentos positivos */
+    --rc-amber: #F4A261;           /* Ámbar Cálido — advertencias */
+    --rc-green: #06D6A0;           /* Verde Esperanza — éxito */
+    --rc-red: #E63946;             /* Rojo Frambuesa — peligro/error */
+    --rc-red-hover: #C1121F;       /* Rojo Profundo — hover peligro */
+
+    /* Texto */
+    --rc-text: #1D3557;            /* Texto principal */
+    --rc-text-muted: #4A5B6E;      /* Gris Pizarra — texto secundario */
+    --rc-text-disabled: #A0AEC0;   /* Gris Suave — deshabilitado/métricas bajas */
+
+    /* Bordes y sombras */
+    --rc-border: #E2E8F0;          /* Gris Perla */
+    --rc-shadow: rgba(29, 53, 87, 0.1); /* Azul Transparente */
+
+    --rc-radius: 12px;
+    --rc-radius-sm: 8px;
+}
+
+body {
+    background-color: var(--rc-bg);
+    color: var(--rc-text);
+}
+
+/* ---------- Tarjetas ---------- */
+.rc-card {
+    background: var(--rc-surface);
+    border: 1px solid var(--rc-border);
+    border-radius: var(--rc-radius);
+    box-shadow: 0 10px 24px -12px var(--rc-shadow);
+}
+
+/* ---------- Botones ---------- */
+.rc-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    padding: 0.65rem 1.3rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color .15s ease, transform .15s ease, box-shadow .15s ease;
+    text-decoration: none;
+}
+
+.rc-btn:hover { transform: translateY(-1px); }
+.rc-btn:active { transform: translateY(0); }
+.rc-btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+.rc-btn-primary {
+    background: var(--rc-mint);
+    color: var(--rc-navy);
+}
+.rc-btn-primary:hover { background: var(--rc-mint-hover); }
+
+.rc-btn-navy {
+    background: var(--rc-navy);
+    color: #fff;
+}
+.rc-btn-navy:hover { background: #16294a; }
+
+.rc-btn-success {
+    background: var(--rc-green);
+    color: #ffffff;
+}
+.rc-btn-success:hover { filter: brightness(0.92); }
+
+.rc-btn-danger {
+    background: var(--rc-red);
+    color: #fff;
+}
+.rc-btn-danger:hover { background: var(--rc-red-hover); }
+
+.rc-btn-ghost {
+    background: transparent;
+    color: var(--rc-blue);
+    border: 1px solid var(--rc-border);
+}
+.rc-btn-ghost:hover { background: #f1f6f8; }
+
+/* ---------- Badges ---------- */
+.rc-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 0.25rem 0.65rem;
+    border-radius: 999px;
+    line-height: 1;
+}
+
+.rc-badge-new     { background: rgba(255, 209, 102, 0.25); color: #8a6300; }
+.rc-badge-progress{ background: rgba(69, 123, 157, 0.15); color: var(--rc-blue); }
+.rc-badge-success { background: rgba(6, 214, 160, 0.15); color: #067a5c; }
+.rc-badge-warning { background: rgba(244, 162, 97, 0.18); color: #9c5417; }
+.rc-badge-danger  { background: rgba(230, 57, 70, 0.12); color: var(--rc-red); }
+.rc-badge-muted   { background: #eef1f4; color: var(--rc-text-disabled); }
+
+/* ---------- Alertas ---------- */
+.rc-alert {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    border-radius: var(--rc-radius-sm);
+    padding: 0.85rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    border: 1px solid transparent;
+}
+
+.rc-alert-success { background: rgba(6, 214, 160, 0.1); color: #067a5c; border-color: rgba(6, 214, 160, 0.3); }
+.rc-alert-warning  { background: rgba(244, 162, 97, 0.12); color: #9c5417; border-color: rgba(244, 162, 97, 0.35); }
+.rc-alert-danger   { background: rgba(230, 57, 70, 0.1); color: var(--rc-red-hover); border-color: rgba(230, 57, 70, 0.3); }
+
+/* ---------- Inputs ---------- */
+.rc-label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--rc-text-muted);
+    margin-bottom: 0.35rem;
+}
+
+.rc-input {
+    width: 100%;
+    background: var(--rc-surface);
+    border: 1px solid var(--rc-border);
+    border-radius: var(--rc-radius-sm);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.9rem;
+    color: var(--rc-text);
+    transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+.rc-input::placeholder { color: var(--rc-text-disabled); }
+
+.rc-input:focus {
+    outline: none;
+    border-color: var(--rc-blue);
+    box-shadow: 0 0 0 3px rgba(69, 123, 157, 0.15);
+}
+
+/* ---------- Textos ---------- */
+.rc-text-muted { color: var(--rc-text-muted); }
+.rc-text-disabled { color: var(--rc-text-disabled); }
