@@ -13,27 +13,37 @@ class DashboardController extends Controller
     public function coordinador(Request $request): View
     {
         $user = $request->user();
+        $institucionId = $user->institucion_id;
 
-        $base = Caso::query();
-        if ($user->institucion_id) {
-            $base->where('institucion_id', $user->institucion_id);
-        }
+        $scoped = function () use ($institucionId) {
+            $q = Caso::query();
+            if ($institucionId) {
+                $q->where('institucion_id', $institucionId);
+            }
+            return $q;
+        };
 
-        $porEstado = (clone $base)->select('estado', DB::raw('count(*) as total'))
-            ->groupBy('estado')->pluck('total', 'estado');
+        $porEstado = $scoped()
+            ->select('estado', DB::raw('count(*) as total'))
+            ->groupBy('estado')
+            ->pluck('total', 'estado');
 
-        $porTipo = (clone $base)->select('tipo_acoso', DB::raw('count(*) as total'))
-            ->groupBy('tipo_acoso')->pluck('total', 'tipo_acoso');
+        $porTipo = $scoped()
+            ->select('tipo_acoso', DB::raw('count(*) as total'))
+            ->groupBy('tipo_acoso')
+            ->pluck('total', 'tipo_acoso');
 
-        $porMes = (clone $base)
+        $porMes = $scoped()
             ->select(DB::raw("strftime('%Y-%m', created_at) as mes"), DB::raw('count(*) as total'))
-            ->groupBy('mes')->orderBy('mes')->pluck('total', 'mes');
+            ->groupBy('mes')
+            ->orderBy('mes')
+            ->pluck('total', 'mes');
 
         $totales = [
-            'total' => (clone $base)->count(),
-            'abiertos' => (clone $base)->whereNotIn('estado', ['resuelto', 'cerrado'])->count(),
-            'resueltos' => (clone $base)->where('estado', 'resuelto')->count(),
-            'criticos' => (clone $base)->where('prioridad', 'critica')->count(),
+            'total' => $scoped()->count(),
+            'abiertos' => $scoped()->whereNotIn('estado', ['resuelto', 'cerrado'])->count(),
+            'resueltos' => $scoped()->where('estado', 'resuelto')->count(),
+            'criticos' => $scoped()->where('prioridad', 'critica')->count(),
         ];
 
         $instituciones = Institucion::orderBy('nombre')->get();

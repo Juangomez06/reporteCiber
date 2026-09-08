@@ -1,47 +1,71 @@
 <x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <h1 class="auth-title">Bienvenido de nuevo</h1>
+    <p class="auth-subtitle">Inicia sesión para continuar en Reporte Ciber</p>
+
+    @if (session('status'))
+        <div class="auth-status">✅ {{ session('status') }}</div>
+    @endif
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
 
         <!-- Documento o Email -->
-        <div>
-            <x-input-label for="login" :value="__('Documento o Email')" />
-            <x-text-input id="login" class="block mt-1 w-full" type="text" name="login" :value="old('login')" required autofocus autocomplete="username" />
+        <div class="auth-field">
+            <label for="login" class="rc-label">🧑‍🎓 Documento o correo</label>
+            <input
+                id="login"
+                type="text"
+                name="login"
+                value="{{ old('login') }}"
+                class="rc-input"
+                placeholder="Tu documento o correo"
+                required
+                autofocus
+                autocomplete="username"
+            >
             <x-input-error :messages="$errors->get('login')" class="mt-2" />
         </div>
 
         <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
+        <div class="auth-field">
+            <label for="password" class="rc-label">🔒 Contraseña</label>
+            <input
+                id="password"
+                type="password"
+                name="password"
+                class="rc-input"
+                placeholder="Tu contraseña"
+                required
+                autocomplete="current-password"
+            >
             <x-input-error :messages="$errors->get('password')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+        <div class="auth-row">
+            <label for="remember_me" class="auth-checkbox">
+                <input id="remember_me" type="checkbox" name="remember">
+                Recordarme
             </label>
-        </div>
 
-        <div class="flex items-center justify-end mt-4">
             @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+                <a class="auth-link" href="{{ route('password.request') }}">
+                    ¿Olvidaste tu contraseña?
                 </a>
             @endif
-
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
         </div>
+
+        <button type="submit" class="auth-submit">
+            Iniciar sesión
+        </button>
     </form>
+
+    @if (Route::has('register'))
+        <p class="auth-footer">
+            ¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a>
+        </p>
+    @endif
+
+    <p class="auth-footer">
+        ¿Vives una situación de acoso? <a href="{{ route('casos.reportar') }}" target="_blank">Reporta un caso</a> — puede ser anónimo.
+    </p>
 </x-guest-layout>

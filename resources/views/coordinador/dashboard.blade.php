@@ -20,43 +20,55 @@
 
             <div class="dash-kpis">
                 <div class="dash-kpi">
-                    <p class="dash-kpi__label">Total casos</p>
-                    <p class="dash-kpi__value">{{ $totales['total'] }}</p>
+                    <span class="dash-kpi__icon">📋</span>
+                    <div>
+                        <p class="dash-kpi__label">Total casos</p>
+                        <p class="dash-kpi__value">{{ $totales['total'] }}</p>
+                    </div>
                 </div>
 
                 <div class="dash-kpi dash-kpi--amber">
-                    <p class="dash-kpi__label">Abiertos</p>
-                    <p class="dash-kpi__value">{{ $totales['abiertos'] }}</p>
+                    <span class="dash-kpi__icon">⏳</span>
+                    <div>
+                        <p class="dash-kpi__label">Abiertos</p>
+                        <p class="dash-kpi__value">{{ $totales['abiertos'] }}</p>
+                    </div>
                 </div>
 
                 <div class="dash-kpi dash-kpi--green">
-                    <p class="dash-kpi__label">Resueltos</p>
-                    <p class="dash-kpi__value">{{ $totales['resueltos'] }}</p>
+                    <span class="dash-kpi__icon">✅</span>
+                    <div>
+                        <p class="dash-kpi__label">Resueltos</p>
+                        <p class="dash-kpi__value">{{ $totales['resueltos'] }}</p>
+                    </div>
                 </div>
 
                 <div class="dash-kpi dash-kpi--red">
-                    <p class="dash-kpi__label">Críticos</p>
-                    <p class="dash-kpi__value">{{ $totales['criticos'] }}</p>
+                    <span class="dash-kpi__icon">🚨</span>
+                    <div>
+                        <p class="dash-kpi__label">Críticos</p>
+                        <p class="dash-kpi__value">{{ $totales['criticos'] }}</p>
+                    </div>
                 </div>
             </div>
 
             <div class="dash-panels">
                 <div class="dash-panel">
-                    <h3 class="dash-panel__title">Casos por estado</h3>
+                    <h3 class="dash-panel__title">📊 Casos por estado</h3>
                     <div class="dash-panel__canvas-wrap">
                         <canvas id="chartEstado"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel">
-                    <h3 class="dash-panel__title">Casos por tipo</h3>
+                    <h3 class="dash-panel__title">🏷️ Casos por tipo</h3>
                     <div class="dash-panel__canvas-wrap">
                         <canvas id="chartTipo"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel dash-panel--wide">
-                    <h3 class="dash-panel__title">Casos por mes</h3>
+                    <h3 class="dash-panel__title">📅 Casos por mes</h3>
                     <div class="dash-panel__canvas-wrap">
                         <canvas id="chartMes"></canvas>
                     </div>
@@ -66,17 +78,17 @@
             <div class="dash-actions">
                 <a href="{{ route('instituciones.index') }}"
                    class="dash-btn dash-btn--ghost">
-                    Gestionar instituciones
+                    🏫 Gestionar instituciones
                 </a>
 
                 <a href="{{ route('estudiantes.importar') }}"
                    class="dash-btn dash-btn--ghost">
-                    Importar Estudiantes
+                    📥 Importar estudiantes
                 </a>
 
                 <a href="{{ route('casos.index') }}"
                    class="dash-btn dash-btn--primary">
-                    Ver todos los casos
+                    📁 Ver todos los casos
                 </a>
             </div>
 
@@ -97,12 +109,12 @@
                 datasets: [{
                     data: Object.values(porEstado),
                     backgroundColor: [
-                        '#f59e0b',
-                        '#3b82f6',
-                        '#8b5cf6',
-                        '#f97316',
-                        '#10b981',
-                        '#6b7280'
+                        '#FFD166',
+                        '#457B9D',
+                        '#A8DADC',
+                        '#F4A261',
+                        '#06D6A0',
+                        '#4A5B6E'
                     ]
                 }]
             },
@@ -118,7 +130,7 @@
                 datasets: [{
                     label: 'Casos',
                     data: Object.values(porTipo),
-                    backgroundColor: '#4f46e5',
+                    backgroundColor: '#457B9D',
                     borderRadius: 6
                 }]
             },
@@ -139,8 +151,8 @@
                 datasets: [{
                     label: 'Casos por mes',
                     data: Object.values(porMes),
-                    borderColor: '#4f46e5',
-                    backgroundColor: 'rgba(79,70,229,0.1)',
+                    borderColor: '#1D3557',
+                    backgroundColor: 'rgba(29,53,87,0.1)',
                     fill: true,
                     tension: 0.3
                 }]
