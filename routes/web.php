@@ -6,10 +6,11 @@ use App\Http\Controllers\ExportController;
 use App\Http\Controllers\InstitucionController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\EstudianteImportController;
+use App\Http\Controllers\EstudianteController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 // Reporte de casos: público, soporta anónimo
@@ -61,6 +62,18 @@ Route::middleware(['auth', 'role:coordinador'])->group(function () {
 
     Route::post('/estudiantes/importar', [EstudianteImportController::class, 'import'])
         ->name('estudiantes.importar.post');
+        
+    // Gestión de estudiantes
+    Route::get('/estudiantes', [EstudianteController::class, 'index'])
+        ->name('estudiantes.index');
+    Route::get('/estudiantes/{estudiante}', [EstudianteController::class, 'show'])
+        ->name('estudiantes.show');
+    Route::get('/estudiantes/{estudiante}/edit', [EstudianteController::class, 'edit'])
+        ->name('estudiantes.edit');
+    Route::put('/estudiantes/{estudiante}', [EstudianteController::class, 'update'])
+        ->name('estudiantes.update');
+    Route::delete('/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])
+        ->name('estudiantes.destroy');
 });
 
 // ESTUDIANTE

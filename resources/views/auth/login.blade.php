@@ -59,13 +59,7 @@
         </button>
     </form>
 
-    @if (Route::has('register'))
-        <p class="auth-footer">
-            ¿No tienes cuenta? <a href="{{ route('register') }}">Regístrate aquí</a>
-        </p>
-    @endif
-
     <p class="auth-footer">
-        ¿Vives una situación de acoso? <a href="{{ route('casos.reportar') }}" target="_blank">Reporta un caso</a> — puede ser anónimo.
+        ¿Vives una situación de acoso? <span style="color: #18629b;">Reporta un caso</span> — puede ser anónimo.
     </p>
 </x-guest-layout>
