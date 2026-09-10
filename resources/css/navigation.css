@@ -220,6 +220,8 @@
     background: var(--rc-bg-card);
     border: 1px solid var(--rc-border);
     box-shadow: 0 20px 30px -14px var(--rc-shadow-heavy);
+    transform-origin: top right;
+    z-index: 200;
 }
 
 .nav-dropdown-link {

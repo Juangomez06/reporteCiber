@@ -55,22 +55,22 @@
             <div class="dash-panels">
                 <div class="dash-panel">
                     <h3 class="dash-panel__title">📊 Casos por estado</h3>
-                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
-                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
+                    <div class="dash-panel__canvas-wrap">
+                        <canvas id="chartEstado"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel">
                     <h3 class="dash-panel__title">🏷️ Casos por tipo</h3>
-                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
-                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
+                    <div class="dash-panel__canvas-wrap">
+                        <canvas id="chartTipo"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel dash-panel--wide">
                     <h3 class="dash-panel__title">📅 Casos por mes</h3>
-                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
-                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
+                    <div class="dash-panel__canvas-wrap">
+                        <canvas id="chartMes"></canvas>
                     </div>
                 </div>
             </div>
@@ -96,71 +96,12 @@
         </div>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+    <div id="dashboard-data"
+         data-por-estado='@json($porEstado)'
+         data-por-tipo='@json($porTipo)'
+         data-por-mes='@json($porMes)'
+         style="display:none">
+    </div>
 
-    <script>
-        const porEstado = @json($porEstado);
-        const porTipo = @json($porTipo);
-        const porMes = @json($porMes);
-
-        new Chart(document.getElementById('chartEstado'), {
-            type: 'doughnut',
-            data: {
-                labels: Object.keys(porEstado),
-                datasets: [{
-                    data: Object.values(porEstado),
-                    backgroundColor: [
-                        '#FFD166',
-                        '#457B9D',
-                        '#A8DADC',
-                        '#F4A261',
-                        '#06D6A0',
-                        '#4A5B6E'
-                    ]
-                }]
-            },
-            options: {
-                maintainAspectRatio: false
-            }
-        });
-
-        new Chart(document.getElementById('chartTipo'), {
-            type: 'bar',
-            data: {
-                labels: Object.keys(porTipo),
-                datasets: [{
-                    label: 'Casos',
-                    data: Object.values(porTipo),
-                    backgroundColor: '#457B9D',
-                    borderRadius: 6
-                }]
-            },
-            options: {
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-
-        new Chart(document.getElementById('chartMes'), {
-            type: 'line',
-            data: {
-                labels: Object.keys(porMes),
-                datasets: [{
-                    label: 'Casos por mes',
-                    data: Object.values(porMes),
-                    borderColor: '#1D3557',
-                    backgroundColor: 'rgba(29,53,87,0.1)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                maintainAspectRatio: false
-            }
-        });
-    </script>
+    @vite('resources/js/dashboard-charts.js')
 </x-app-layout>

@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class CasoHistorial extends Model
 {
+    protected $table = 'caso_historiales';
+
     protected $fillable = ['caso_id', 'user_id', 'accion', 'valor_anterior', 'valor_nuevo'];
 
     public function caso(): BelongsTo

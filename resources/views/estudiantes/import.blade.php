@@ -97,7 +97,7 @@
                     <p>2. Completa los datos en el archivo Excel.</p>
                     <p>3. Selecciona el archivo y haz clic en "Importar".</p>
                     <div class="dash-instructions__download">
-                        <a href="#" class="dash-btn dash-btn--ghost dash-btn--sm">
+                        <a href="{{ route('estudiantes.plantilla') }}" class="dash-btn dash-btn--ghost dash-btn--sm">
                             📄 Descargar plantilla
                         </a>
                     </div>

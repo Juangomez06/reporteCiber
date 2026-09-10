@@ -86,12 +86,34 @@ class EstudiantesImport implements ToCollection, WithHeadingRow, WithChunkReadin
 
     private function parseDate($value)
     {
-        if (empty($value)) return null;
-        try {
-            return Carbon::createFromFormat('d/m/Y', $value)->format('Y-m-d');
-        } catch (\Exception $e) {
+        if (empty($value)) {
             return null;
         }
+
+        // Ya viene como Carbon/DateTime (caso normal de celdas de fecha en Excel)
+        if ($value instanceof \DateTimeInterface) {
+            return Carbon::instance($value)->format('Y-m-d');
+        }
+
+        // Serial numérico de Excel (por si llega crudo)
+        if (is_numeric($value)) {
+            try {
+                return \PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)->format('Y-m-d');
+            } catch (\Throwable $e) {
+                return null;
+            }
+        }
+
+        // Texto: probar varios formatos comunes
+        foreach (['d/m/Y', 'Y-m-d', 'd-m-Y'] as $formato) {
+            try {
+                return Carbon::createFromFormat($formato, trim((string) $value))->format('Y-m-d');
+            } catch (\Throwable $e) {
+                continue;
+            }
+        }
+
+        return null;
     }
 
     public function rules(): array

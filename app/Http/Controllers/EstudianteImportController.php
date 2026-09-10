@@ -13,6 +13,15 @@ class EstudianteImportController extends Controller
         return view('estudiantes.import');
     }
 
+    public function plantilla()
+    {
+        $path = public_path('plantillas/PlantillaCargueEstudiantes.xlsx');
+
+        abort_unless(file_exists($path), 404, 'La plantilla no está disponible.');
+
+        return response()->download($path, 'PlantillaCargueEstudiantes.xlsx');
+    }
+
     //funcion para importar estudiantes desde un archivo Excel
     public function import(Request $request)
     {
