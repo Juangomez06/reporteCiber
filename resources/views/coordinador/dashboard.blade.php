@@ -55,39 +55,40 @@
             <div class="dash-panels">
                 <div class="dash-panel">
                     <h3 class="dash-panel__title">📊 Casos por estado</h3>
-                    <div class="dash-panel__canvas-wrap">
-                        <canvas id="chartEstado"></canvas>
+                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
+                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel">
                     <h3 class="dash-panel__title">🏷️ Casos por tipo</h3>
-                    <div class="dash-panel__canvas-wrap">
-                        <canvas id="chartTipo"></canvas>
+                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
+                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
                     </div>
                 </div>
 
                 <div class="dash-panel dash-panel--wide">
                     <h3 class="dash-panel__title">📅 Casos por mes</h3>
-                    <div class="dash-panel__canvas-wrap">
-                        <canvas id="chartMes"></canvas>
+                    <div class="dash-panel__canvas-wrap" style="height: 120px !important;">
+                        <canvas id="chartEstado" style="height: 120px !important;"></canvas>
                     </div>
                 </div>
             </div>
 
             <div class="dash-actions">
-                <a href="{{ route('instituciones.index') }}"
-                   class="dash-btn dash-btn--ghost">
+                <a href="{{ route('instituciones.index') }}" class="dash-btn dash-btn--ghost">
                     🏫 Gestionar instituciones
                 </a>
 
-                <a href="{{ route('estudiantes.importar') }}"
-                   class="dash-btn dash-btn--ghost">
+                <a href="{{ route('estudiantes.index') }}" class="dash-btn dash-btn--ghost">
+                    👨‍🎓 Gestionar estudiantes
+                </a>
+
+                <a href="{{ route('estudiantes.importar') }}" class="dash-btn dash-btn--ghost">
                     📥 Importar estudiantes
                 </a>
 
-                <a href="{{ route('casos.index') }}"
-                   class="dash-btn dash-btn--primary">
+                <a href="{{ route('casos.index') }}" class="dash-btn dash-btn--primary">
                     📁 Ver todos los casos
                 </a>
             </div>
