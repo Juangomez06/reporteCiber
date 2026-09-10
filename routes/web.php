@@ -57,12 +57,15 @@ Route::middleware(['auth', 'role:coordinador'])->group(function () {
         ->except('show');
 
     // Importación de estudiantes
+    Route::get('/estudiantes/plantilla', [EstudianteImportController::class, 'plantilla'])
+        ->name('estudiantes.plantilla');
+
     Route::get('/estudiantes/importar', [EstudianteImportController::class, 'showForm'])
         ->name('estudiantes.importar');
 
     Route::post('/estudiantes/importar', [EstudianteImportController::class, 'import'])
         ->name('estudiantes.importar.post');
-        
+
     // Gestión de estudiantes
     Route::get('/estudiantes', [EstudianteController::class, 'index'])
         ->name('estudiantes.index');
@@ -74,6 +77,8 @@ Route::middleware(['auth', 'role:coordinador'])->group(function () {
         ->name('estudiantes.update');
     Route::delete('/estudiantes/{estudiante}', [EstudianteController::class, 'destroy'])
         ->name('estudiantes.destroy');
+    Route::get('/estudiantes/plantilla', [EstudianteImportController::class, 'plantilla'])
+        ->name('estudiantes.plantilla');
 });
 
 // ESTUDIANTE
@@ -82,4 +87,4 @@ Route::middleware(['auth', 'role:estudiante'])->group(function () {
         ->name('estudiante.dashboard');
 });
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';
