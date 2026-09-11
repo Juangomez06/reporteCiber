@@ -45,7 +45,7 @@ class CasoService
 
     public function adjuntarEvidencia(Caso $caso, UploadedFile $archivo): void
     {
-        $ruta = $archivo->store("evidencias/{$caso->id}", 'local');
+        $ruta = $archivo->store("evidencias/{$caso->id}", 'public');
 
         $caso->evidencias()->create([
             'ruta' => $ruta,

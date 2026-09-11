@@ -15,11 +15,13 @@ class DashboardController extends Controller
         $user = $request->user();
         $institucionId = $user->institucion_id;
 
-        $scoped = function () use ($institucionId) {
+        $scoped = function () use ($user, $institucionId) {
             $q = Caso::query();
-            if ($institucionId) {
+
+            if (!$user->isCoordinador() && $institucionId) {
                 $q->where('institucion_id', $institucionId);
             }
+
             return $q;
         };
 
@@ -40,10 +42,10 @@ class DashboardController extends Controller
             ->pluck('total', 'mes');
 
         $totales = [
-            'total' => $scoped()->count(),
-            'abiertos' => $scoped()->whereNotIn('estado', ['resuelto', 'cerrado'])->count(),
+            'total'     => $scoped()->count(),
+            'abiertos'  => $scoped()->whereNotIn('estado', ['resuelto', 'cerrado'])->count(),
             'resueltos' => $scoped()->where('estado', 'resuelto')->count(),
-            'criticos' => $scoped()->where('prioridad', 'critica')->count(),
+            'criticos'  => $scoped()->where('prioridad', 'critica')->count(),
         ];
 
         $instituciones = Institucion::orderBy('nombre')->get();

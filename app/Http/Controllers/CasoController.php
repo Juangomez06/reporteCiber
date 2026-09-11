@@ -55,7 +55,7 @@ class CasoController extends Controller
             $query->where(function ($q) use ($user) {
                 $q->where('orientador_id', $user->id)->orWhere('reporter_id', $user->id);
             });
-        } elseif ($user->institucion_id) {
+        } elseif (!$user->isCoordinador() && $user->institucion_id) {
             $query->where('institucion_id', $user->institucion_id);
         }
 

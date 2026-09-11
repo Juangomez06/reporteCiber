@@ -19,12 +19,51 @@
 
             @if ($caso->evidencias->count())
                 <div class="bg-white p-6 shadow-sm sm:rounded-lg">
-                    <h3 class="font-semibold mb-2">Evidencia</h3>
-                    <ul class="list-disc list-inside text-sm">
+                    <h3 class="font-semibold mb-4">Evidencia</h3>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         @foreach ($caso->evidencias as $ev)
-                            <li>{{ $ev->nombre_original }}</li>
+                            @php
+                                $url      = \Illuminate\Support\Facades\Storage::url($ev->ruta);
+                                $mime     = $ev->mime ?? '';
+                                $esImagen = str_starts_with($mime, 'image/');
+                                $esVideo  = str_starts_with($mime, 'video/');
+                                $esPdf    = $mime === 'application/pdf';
+                            @endphp
+
+                            <div class="border rounded-lg p-3 bg-gray-50">
+                                <p class="text-xs text-gray-500 mb-2 truncate" title="{{ $ev->nombre_original }}">
+                                    {{ $ev->nombre_original }}
+                                    @if($ev->tamano)
+                                        <span class="text-gray-400">({{ number_format($ev->tamano / 1024, 1) }} KB)</span>
+                                    @endif
+                                </p>
+
+                                @if ($esImagen)
+                                    <a href="{{ $url }}" target="_blank" rel="noopener">
+                                        <img src="{{ $url }}"
+                                            alt="{{ $ev->nombre_original }}"
+                                            class="w-full max-h-96 object-contain rounded shadow-sm hover:opacity-90 transition">
+                                    </a>
+                                @elseif ($esVideo)
+                                    <video controls class="w-full max-h-96 rounded shadow-sm">
+                                        <source src="{{ $url }}" type="{{ $mime }}">
+                                        Tu navegador no soporta video.
+                                    </video>
+                                @elseif ($esPdf)
+                                    <a href="{{ $url }}" target="_blank" rel="noopener"
+                                    class="inline-block text-blue-600 underline text-sm">
+                                        📄 Ver PDF
+                                    </a>
+                                @else
+                                    <a href="{{ $url }}" target="_blank" rel="noopener"
+                                    class="inline-block text-blue-600 underline text-sm">
+                                        📎 Descargar archivo
+                                    </a>
+                                @endif
+                            </div>
                         @endforeach
-                    </ul>
+                    </div>
                 </div>
             @endif
 
